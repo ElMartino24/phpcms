@@ -3,14 +3,18 @@
 namespace CMS\Controller;
 
 use CMS\Controller as AbstractController;
+use CMS\Model\Post as PostModel;
 
 final class Posts extends AbstractController {
-    public function __construct() {
-        $this->postModel = $this->model('Post');
+
+    protected ?PostModel $Model = NULL;
+
+    public function __construct() {    
+        parent::__construct( PostModel::class );
     }
 
-    public function index() {
-        $posts = $this->postModel->findAllPosts();
+    public function index() : void {
+        $posts = $this->Model->findAllPosts();
 
         $data = [
             'posts' => $posts
@@ -19,7 +23,7 @@ final class Posts extends AbstractController {
         $this->view('posts/index', $data);
     }
 
-    public function create() {
+    public function create() : void  {
         if(!isLoggedIn()) {
             header("Location: " . "/posts");
         }
@@ -51,7 +55,7 @@ final class Posts extends AbstractController {
             }
 
             if (empty($data['titleError']) && empty($data['bodyError'])) {
-                if ($this->postModel->addPost($data)) {
+                if ($this->Model->addPost($data)) {
                     header("Location: " . "/posts");
                 } else {
                     die("Something went wrong, please try again!");
@@ -66,7 +70,7 @@ final class Posts extends AbstractController {
 
     public function update($id) {
 
-        $post = $this->postModel->findPostById($id);
+        $post = $this->Model->findPostById($id);
 
         if(!isLoggedIn()) {
             header("Location: "  . "/posts");
@@ -103,16 +107,16 @@ final class Posts extends AbstractController {
                 $data['bodyError'] = 'The body of a post cannot be empty';
             }
 
-            if($data['title'] == $this->postModel->findPostById($id)->title) {
+            if($data['title'] == $this->Model->findPostById($id)->title) {
                 $data['titleError'] == 'At least change the title!';
             }
 
-            if($data['body'] == $this->postModel->findPostById($id)->body) {
+            if($data['body'] == $this->Model->findPostById($id)->body) {
                 $data['bodyError'] == 'At least change the body!';
             }
 
             if (empty($data['titleError']) && empty($data['bodyError'])) {
-                if ($this->postModel->updatePost($data)) {
+                if ($this->Model->updatePost($data)) {
                     header("Location: "  . "/posts");
                 } else {
                     die("Something went wrong, please try again!");
@@ -127,7 +131,7 @@ final class Posts extends AbstractController {
 
     public function delete($id) {
 
-        $post = $this->postModel->findPostById($id);
+        $post = $this->Model->findPostById($id);
 
         if(!isLoggedIn()) {
             header("Location: " . "/posts");
@@ -146,7 +150,7 @@ final class Posts extends AbstractController {
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
-            if($this->postModel->deletePost($id)) {
+            if($this->Model->deletePost($id)) {
                     header("Location: "  . "/posts");
             } else {
                die('Something went wrong!');

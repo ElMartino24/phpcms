@@ -5,7 +5,8 @@ namespace CMS\Model;
 use CMS\Model as AbstractModel;
 
 final class User extends AbstractModel {
-    public function register($data) {
+
+    public function register( array $data ) : bool  {
         $this->db->query('INSERT INTO users (username, email, password) VALUES(:username, :email, :password)');
 
         //Bind values

@@ -3,10 +3,12 @@
 namespace CMS\Controller;
 
 use CMS\Controller as AbstractController;
+use CMS\Model\User as UserModel ;
 
 final class Users extends AbstractController {
+    
     public function __construct() {
-        $this->userModel = $this->model('User');
+        parent::__construct( UserModel::class );
     }
 
     // Funktionalität wie validierung etc in Model auslagern
@@ -55,7 +57,7 @@ final class Users extends AbstractController {
                 $data['emailError'] = 'Please enter the correct format.';
             } else {
                 //Check if email exists.
-                if ($this->userModel->findUserByEmail($data['email'])) {
+                if ($this->Model->findUserByEmail($data['email'])) {
                 $data['emailError'] = 'Email is already taken.';
                 }
             }

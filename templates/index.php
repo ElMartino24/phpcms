@@ -1,9 +1,7 @@
-<?php
-   require 'includes/head.php';
-?>
+
 <div id="section-landing">
     <?php
-       require 'includes/navigation.php';
+       $this->get_template_part( 'includes/navigation' );
     ?>
 
     <div class="wrapper-landing">

@@ -9,7 +9,7 @@ namespace CMS;
  */
 function autoload( string $class ) : void {
     /** @var string $replace_namespace */
-    $replace_namespace = str_replace( __NAMESPACE__ . '\\', CMS_APPLICATION_DIR . DIRECTORY_SEPARATOR, $class );
+    $replace_namespace = str_replace( __NAMESPACE__ . '\\', CMS_SOURCE_DIR . DIRECTORY_SEPARATOR, $class );
     /** @var string $create_dir_path */
     $create_dir_path = str_replace( '\\', DIRECTORY_SEPARATOR, $replace_namespace ); 
     /** @var string $file_to_load */

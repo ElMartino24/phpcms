@@ -7,7 +7,7 @@ use CMS\Controller;
 // Wir wollen keine Erben von Core haben, deshalb als Final deklariert
 final class Core {
  
-    const DEFAULT_CONTROLLER = 'Index';
+    const DEFAULT_CONTROLLER = 'Home';
     const DEFAULT_METHOD     = 'index';
 
     const ERROR_CONTROLLER    = 'Error';
@@ -69,7 +69,7 @@ final class Core {
       $explode = explode( '/', $url );
 
       return [
-        'controller'  =>  $explode[ 0 ] ?? self::DEFAULT_CONTROLLER,
+        'controller'  =>  empty( $explode[ 0 ] ) ? self::DEFAULT_CONTROLLER : $explode[ 0 ],
         'method'      =>  $explode[ 1 ] ?? self::DEFAULT_METHOD,
         'argument'    =>  $explode[ 2 ] ?? ''
       ];

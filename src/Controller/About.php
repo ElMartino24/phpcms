@@ -7,7 +7,13 @@ use CMS\Controller as AbstractController;
 final class About extends AbstractController {
     
     public function index() : void {
-        echo "ABOUT!";
+        $this->View->data = [
+            'title' => 'About page'
+        ];
+
+        $this->View->get_header_template();
+        $this->View->get_template_part( 'index' );
+        $this->View->get_footer_template();
     }
 
     public function you() : void {
