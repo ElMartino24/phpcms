@@ -1,8 +1,10 @@
 <?php
 
+namespace CMS\Controller;
 
+use CMS\Controller as AbstractController;
 
-class Posts extends Controller {
+final class Posts extends AbstractController {
     public function __construct() {
         $this->postModel = $this->model('Post');
     }

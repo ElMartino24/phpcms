@@ -1,10 +1,10 @@
 <?php
-class User {
-    private $db;
-    public function __construct() {
-        $this->db = new Database;
-    }
 
+namespace CMS\Model;
+
+use CMS\Model as AbstractModel;
+
+final class User extends AbstractModel {
     public function register($data) {
         $this->db->query('INSERT INTO users (username, email, password) VALUES(:username, :email, :password)');
 

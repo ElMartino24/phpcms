@@ -1,10 +1,10 @@
 <?php
-   require APPROOT . '/includes/head.php';
+   require '../includes/head.php';
 ?>
 
 <div class="navbar">
     <?php
-       require APPROOT . '/includes/navigation.php';
+       require  '../includes/navigation.php';
     ?>
 </div>
 

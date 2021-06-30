@@ -1,5 +1,11 @@
 <?php
-    class Database {
+
+namespace CMS;
+
+use PDO;
+use PDOException;
+
+final class Database {
         private $dbHost = DB_HOST;
         private $dbUser = DB_USER;
         private $dbPass = DB_PASS;

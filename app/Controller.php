@@ -1,11 +1,12 @@
 <?php
 
 
+namespace CMS;
+
     //Load the model and the view
-    class Controller {
+abstract class Controller {
+
         public function model($model) {
-            //Require model file
-            require_once '../app/models/' . $model . '.php';
             //Instantiate model
             return new $model();
         }
@@ -18,4 +19,5 @@
                 die("View does not exists.");
             }
         }
+
     }

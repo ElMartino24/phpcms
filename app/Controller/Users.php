@@ -1,11 +1,15 @@
 <?php
 
+namespace CMS\Controller;
 
-class Users extends Controller {
+use CMS\Controller as AbstractController;
+
+final class Users extends AbstractController {
     public function __construct() {
         $this->userModel = $this->model('User');
     }
 
+    // Funktionalität wie validierung etc in Model auslagern
     public function register() {
         $data = [
             'username' => '',
@@ -92,6 +96,8 @@ class Users extends Controller {
         $this->view('users/register', $data);
     }
 
+
+    // Funktionalität wie validierung etc in Model auslagern
     public function login() {
         $data = [
             'title' => 'Login page',
@@ -146,10 +152,14 @@ class Users extends Controller {
         $this->view('users/login', $data);
     }
 
+
+    // Muss ins Model (public)
+    // Oder zmindestens private sons per URL aufrufbar
     public function createUserSession($user) {
         $_SESSION['user_id'] = $user->id;
         $_SESSION['username'] = $user->username;
         $_SESSION['email'] = $user->email;
+        exit( 'FUCKED UP' );
         header('location:'  . '/pages/index');
     }
 
